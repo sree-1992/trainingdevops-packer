@@ -1,0 +1,47 @@
+name: Build and deploy ami
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  PACKER_VERSION: "1.10.3"
+
+jobs:
+
+  build-image:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Install Packer
+      uses: hashicorp/setup-packer@v2
+      with:
+        version: ${{ env.PACKER_VERSION }}
+
+    - name: Verify Packer Installation
+      run: packer --version
+
+    - name: Initialize Packer
+      run: packer init .
+      working-directory: ./packer/
+
+    - name: Validate Packer Configuration
+      run: packer validate .
+      working-directory: ./packer/
+
+    - name: Build Machine Image with Packer
+      run: packer build .
+      working-directory: ./packer/
+
