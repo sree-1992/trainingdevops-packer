@@ -3,7 +3,7 @@
 variable "application_repository" {
   description = "The URL of the application repository to be cloned and built."
   type        = string
-  default     = "https://github.com/sree-1992/trainingdevops-cloud.git"
+  default     = "https://github.com/sree-1992/trainingdevops-packer.git"
 }
 
 # Define the project name
