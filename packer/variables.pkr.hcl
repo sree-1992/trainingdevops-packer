@@ -3,7 +3,7 @@
 variable "application_repository" {
   description = "The URL of the application repository to be cloned and built."
   type        = string
-  default     = "https://github.com/Fujikomalan/trainingdevops-cloud.git"
+  default     = "https://github.com/sree-1992/trainingdevops-cloud.git"
 }
 
 # Define the project name
@@ -24,7 +24,7 @@ variable "project_env" {
 variable "ami" {
   description = "The ID of the source AMI to use for creating the new image."
   type        = string
-  default     = "ami-0cc9838aa7ab1dce7"
+  default     = "ami-013168dc3850ef002"
 }
 
 # Define the instance type
